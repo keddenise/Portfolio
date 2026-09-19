@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khate Denise Gonzales — BI &amp; Dashboard Developer</title>
+<meta name="description" content="Business analytics graduate in Batangas, Philippines. I turn messy business data into dashboards people actually use. Open to BI roles and freelance data visualization projects.">
+
+<!-- One typeface, three weights. Tabular figures for every number on the page. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. TOKENS — five colours, one accent. Edit here to reskin.
+   ============================================================ */
+:root {
+  --paper:  #FAFAF8;               /* page background        */
+  --raise:  #FFFFFF;               /* cards, panels          */
+  --ink:    #14181B;               /* headings, numbers      */
+  --muted:  #5E6A70;               /* body support text      */
+  --accent: #16645C;               /* the only accent colour */
+  --accent-soft: rgba(22,100,92,.09);
+  --rule:   rgba(20,24,27,.12);    /* hairlines              */
+  --on-accent: #FAFAF8;
+
+  --font: "Schibsted Grotesk", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --wrap: 960px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #101314; --raise: #171B1D; --ink: #ECEFEE; --muted: #9AA5A9;
+    --accent: #6FC2B4; --accent-soft: rgba(111,194,180,.12);
+    --rule: rgba(236,239,238,.15); --on-accent: #101314;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #101314; --raise: #171B1D; --ink: #ECEFEE; --muted: #9AA5A9;
+  --accent: #6FC2B4; --accent-soft: rgba(111,194,180,.12);
+  --rule: rgba(236,239,238,.15); --on-accent: #101314;
+}
+
+/* ============================================================
+   2. BASE
+   ============================================================ */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-feature-settings: "tnum" 1;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { margin: 0; font-weight: 600; line-height: 1.15; letter-spacing: -.02em; }
+p { margin: 0; max-width: 34em; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+svg { max-width: 100%; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 28px; }
+section { padding: 96px 0; border-top: 1px solid var(--rule); }
+.head { margin-bottom: 44px; }
+.head h2 { font-size: 1.35rem; }
+.head p { margin-top: 8px; color: var(--muted); }
+
+/* [BRACKETED] items still to fill in */
+.ph { color: var(--muted); text-decoration: underline dotted var(--muted); text-underline-offset: 4px; }
+
+/* ============================================================
+   3. NAV
+   ============================================================ */
+.nav { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: 28px 0; }
+.mark { font-weight: 600; font-size: 1rem; color: var(--ink); text-decoration: none; letter-spacing: -.01em; }
+.nav ul { display: flex; flex-wrap: wrap; gap: 22px; margin: 0; padding: 0; list-style: none; }
+.nav a.link { color: var(--muted); text-decoration: none; font-size: .95rem; }
+.nav a.link:hover { color: var(--ink); }
+
+/* ============================================================
+   4. HERO — the page's one load animation
+   ============================================================ */
+.hero { padding: 56px 0 76px; }
+.hero > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero > *:nth-child(2) { animation-delay: .08s; }
+.hero > *:nth-child(3) { animation-delay: .16s; }
+.hero > *:nth-child(4) { animation-delay: .26s; }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+.hero .who { color: var(--muted); font-size: 1rem; }
+.hero h1 {
+  margin-top: 14px;
+  font-size: clamp(2.1rem, 5.4vw, 3.5rem);
+  font-weight: 600; letter-spacing: -.035em; line-height: 1.08;
+  max-width: 17em;
+}
+.hero .lead { margin-top: 20px; color: var(--muted); font-size: 1.15rem; max-width: 32em; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.btn {
+  display: inline-block; padding: 11px 20px; border-radius: 6px;
+  font-family: inherit; font-size: .97rem; font-weight: 500; text-decoration: none;
+  border: 1px solid var(--rule); color: var(--ink); background: transparent;
+  transition: background .18s, color .18s, border-color .18s;
+}
+.btn:hover { border-color: var(--ink); }
+.btn-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+/* ============================================================
+   5. HERO HIGHLIGHTS — real numbers pulled from the case studies
+   ============================================================ */
+.highlights {
+  margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+.hl {
+  padding: 22px 20px 22px 0; border-left: 1px solid var(--rule);
+}
+.hl:first-child { border-left: 0; padding-left: 0; }
+.hl b { display: block; font-size: 1.9rem; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; }
+.hl span { display: block; margin-top: 6px; font-size: .88rem; color: var(--muted); line-height: 1.4; }
+
+/* ============================================================
+   6. ABOUT
+   ============================================================ */
+.about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: start; }
+.about p + p { margin-top: 16px; }
+.facts-list { margin: 0; font-size: .97rem; }
+.facts-list dt { color: var(--muted); margin-top: 16px; }
+.facts-list dt:first-of-type { margin-top: 0; }
+.facts-list dd { margin: 0; }
+
+/* ============================================================
+   7. WORK — one row per project, detail opens on demand
+   ============================================================ */
+.project { border-top: 1px solid var(--rule); }
+.project:first-of-type { border-top: 0; }
+.project > summary {
+  list-style: none; cursor: pointer; padding: 22px 0;
+  display: grid; grid-template-columns: 1fr auto; gap: 16px 24px; align-items: baseline;
+}
+.project > summary::-webkit-details-marker { display: none; }
+.project h3 { font-size: 1.12rem; font-weight: 600; }
+.project .sub { color: var(--muted); font-size: .95rem; margin-top: 4px; }
+.project .more { color: var(--muted); font-size: .9rem; white-space: nowrap; }
+.project[open] .more { color: var(--accent); }
+.project:hover h3 { color: var(--accent); }
+.detail { padding: 0 0 30px; display: grid; grid-template-columns: 1.25fr 1fr; gap: 36px; align-items: start; }
+.facts { margin: 0; }
+.facts dt { font-size: .82rem; font-weight: 600; color: var(--muted); margin-top: 18px; }
+.facts dt:first-of-type { margin-top: 0; }
+.facts dd { margin: 4px 0 0; }
+.tools { display: flex; flex-wrap: wrap; gap: 6px; }
+.tools span { font-size: .84rem; color: var(--accent); background: var(--accent-soft); padding: 3px 9px; border-radius: 4px; }
+.impact { font-weight: 500; }
+.visit { display: inline-block; margin-top: 22px; font-weight: 500; }
+.frame {
+  margin: 0; aspect-ratio: 4 / 3; border: 1px dashed var(--rule); border-radius: 8px;
+  background: var(--raise); display: grid; place-content: center; gap: 10px; text-align: center; padding: 18px;
+  overflow: hidden;
+}
+.frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 7px; }
+.frame figcaption { font-size: .88rem; }
+
+/* ============================================================
+   8. FREELANCE
+   ============================================================ */
+.services { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 48px; }
+.service h3 { font-size: 1.02rem; margin-bottom: 6px; }
+.service p { color: var(--muted); font-size: .97rem; }
+.steps { list-style: none; margin: 60px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; counter-reset: s; }
+.steps li { counter-increment: s; padding-top: 16px; border-top: 1px solid var(--rule); }
+.steps li::before { content: counter(s); display: block; font-size: .85rem; color: var(--accent); margin-bottom: 8px; font-weight: 600; }
+.steps h3 { font-size: 1rem; margin-bottom: 4px; }
+.steps p { color: var(--muted); font-size: .95rem; }
+.proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin: 60px 0 40px; }
+.proof blockquote { margin: 0; padding: 20px; background: var(--raise); border: 1px solid var(--rule); border-radius: 8px; font-size: .97rem; }
+.proof cite { display: block; margin-top: 12px; font-style: normal; font-size: .88rem; }
+
+/* ============================================================
+   9. SKILLS
+   ============================================================ */
+.skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 34px 48px; }
+.skillset h3 { font-size: .85rem; font-weight: 600; color: var(--muted); margin-bottom: 10px; }
+.tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.tags li { font-size: .92rem; padding: 4px 11px; border: 1px solid var(--rule); border-radius: 4px; }
+
+/* ============================================================
+   10. TIMELINE
+   ============================================================ */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li { display: grid; grid-template-columns: 10.5em 1fr; gap: 24px; padding: 18px 0; border-top: 1px solid var(--rule); }
+.timeline li:first-child { border-top: 0; padding-top: 0; }
+.timeline .when { color: var(--muted); font-size: .93rem; }
+.timeline h3 { font-size: 1rem; }
+.timeline small { display: block; color: var(--muted); font-size: .92rem; margin-top: 2px; }
+
+/* ============================================================
+   11. CONTACT + FOOTER
+   ============================================================ */
+.mail { display: inline-block; font-size: clamp(1.25rem, 3.4vw, 1.9rem); font-weight: 600; letter-spacing: -.02em; word-break: break-all; }
+.links { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 24px; font-size: .97rem; }
+footer { padding: 30px 0 52px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .88rem; }
+footer p { max-width: none; }
+
+/* ============================================================
+   12. SCROLL REVEAL — a single 8px fade, once per section
+   ============================================================ */
+.reveal { opacity: 0; transform: translateY(8px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ============================================================
+   13. RESPONSIVE
+   ============================================================ */
+@media (max-width: 800px) {
+  .about, .detail, .services, .steps, .proof, .skills { grid-template-columns: 1fr; }
+  .kpis { grid-template-columns: 1fr; gap: 14px; }
+  .timeline li { grid-template-columns: 1fr; gap: 2px; }
+  .project > summary { grid-template-columns: 1fr; }
+  section { padding: 64px 0; }
+  .hero { padding: 32px 0 52px; }
+  .panel { padding: 18px; }
+}
+
+/* ============================================================
+   14. REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero > * { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="nav">
+    <a class="mark" href="#top">Khate Denise Gonzales</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a class="link" href="#work">Work</a></li>
+        <li><a class="link" href="#freelance">Freelance</a></li>
+        <li><a class="link" href="#skills">Skills</a></li>
+        <li><a class="link" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ===================== HERO ===================== -->
+    <div class="hero">
+      <p class="who">BI and dashboard developer &middot; Batangas, Philippines</p>
+      <h1>I turn messy business data into dashboards people actually use.</h1>
+      <p class="lead">I consolidate scattered spreadsheets, automate the reporting nobody wants to do by hand, and build live views a business owner can open and understand without me in the room.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#work">View work</a>
+        <a class="btn" href="#freelance">Hire me</a>
+      </div>
+
+      <!-- Real numbers pulled from the case studies below — no invented demo data. -->
+      <div class="highlights">
+        <div class="hl"><b>&#8369;9.6M+</b><span>Annual revenue consolidated into one KPI dashboard</span></div>
+        <div class="hl"><b>19+</b><span>Monthly expense sheets automated with VBA</span></div>
+        <div class="hl"><b>10+</b><span>Live charts across the web P&amp;L dashboard</span></div>
+        <div class="hl"><b>0</b><span>Critical defects at launch, across every project</span></div>
+      </div>
+    </div>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section id="about" class="reveal">
+      <div class="head"><h2>About</h2></div>
+      <div class="about">
+        <div>
+          <p>I studied Business Analytics at Batangas State University and spent my internship at a construction and supply company, where month-end reporting lived in a stack of hand-typed spreadsheets. I replaced it with dashboards the owner could open himself.</p>
+          <p>What I like is the moment a tangle of sheets turns into one clear picture, and then the moment someone uses it without asking me how. I care about the numbers being right, and almost as much about the thing being pleasant to look at.</p>
+          <p>Outside of client work I build small things for fun &mdash; vanilla JavaScript, SVG, public datasets I get curious about. That habit is why my dashboards don't look like default templates.</p>
+        </div>
+        <dl class="facts-list">
+          <dt>Based in</dt><dd>Batangas, Philippines. Open to remote, hybrid or on-site.</dd>
+          <dt>Looking for</dt><dd>BI developer, dashboard developer or data analyst roles.</dd>
+          <dt>Also taking</dt><dd>Freelance dashboard and reporting projects.</dd>
+          <dt>Works in</dt><dd>English and Filipino.</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===================== WORK =====================
+         Each project is a <details>: recruiters scan the titles,
+         then open only what interests them. -->
+    <section id="work" class="reveal">
+      <div class="head">
+        <h2>Selected work</h2>
+        <p>From my internship, my capstone, and my own curiosity. Open any project for the detail.</p>
+      </div>
+
+      <details class="project" open>
+        <summary>
+          <div>
+            <h3>Live financial dashboard for four business units</h3>
+            <p class="sub">Web app &middot; NAM Builders and Supply Corporation &middot; 2026</p>
+          </div>
+          <span class="more">Detail</span>
+        </summary>
+        <div class="detail">
+          <dl class="facts">
+            <dt>Problem</dt>
+            <dd>Trading, Builders, Manpower and Loan each reported separately, and profit and loss was only visible once someone compiled it by hand, so decisions ran on stale numbers.</dd>
+            <dt>What I built</dt>
+            <dd>A browser-based statement of comprehensive income for all four units plus an overall summary: clickable KPI cards that drill down, month and year-to-date filters, a 12-month performance trend, a full P&amp;L breakdown table, target-vs-actual tracking and bonus monitoring &mdash; pulling live from Google Sheets through Apps Script and refreshing on its own.</dd>
+            <dt>Tools</dt>
+            <dd class="tools"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Google Apps Script</span><span>REST API</span><span>Chart.js</span></dd>
+            <dt>Result</dt>
+            <dd class="impact">Six drill-down views and 10+ charts covering PHP 6.5M+ in annual revenue, with performance against a PHP 600,000 commission target visible in real time instead of weeks later.</dd>
+          </dl>
+          <div>
+            <figure class="frame">
+              <img src="overall.png" alt="Overall summary view of the NAM financial dashboard" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+              <figcaption class="ph" style="display:none;">[Screenshot of the overall summary view]</figcaption>
+            </figure>
+            <a class="visit" href="https://keddenise.github.io/Financial-Dashboard-ALM-NAM/" target="_blank" rel="noopener">Open the live dashboard</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="project">
+        <summary>
+          <div>
+            <h3>Consolidated executive KPI dashboard</h3>
+            <p class="sub">Excel &middot; NAM Builders and Supply Corporation &middot; 2026</p>
+          </div>
+          <span class="more">Detail</span>
+        </summary>
+        <div class="detail">
+          <dl class="facts">
+            <dt>Problem</dt>
+            <dd>Nobody could see the company as one picture without rebuilding the consolidation manually every month.</dd>
+            <dt>What I built</dt>
+            <dd>A single executive KPI dashboard: Power Query pipelines feeding a DAX model, month and year filters, and drill-downs from company total to individual business unit.</dd>
+            <dt>Tools</dt>
+            <dd class="tools"><span>Excel</span><span>Power Query</span><span>DAX</span><span>VBA</span></dd>
+            <dt>Result</dt>
+            <dd class="impact">Consolidated PHP 9.6M+ in annual revenue across four units into one view, presented directly to the company owner.</dd>
+          </dl>
+          <figure class="frame">
+            <img src="ewan.png" alt="Consolidated executive KPI dashboard" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <figcaption class="ph" style="display:none;">[Screenshot of the KPI dashboard]</figcaption>
+          </figure>
+        </div>
+      </details>
+
+      <details class="project">
+        <summary>
+          <div>
+            <h3>Target vs. actual variance tracking</h3>
+            <p class="sub">Excel &middot; 3 divisions, 15+ client accounts &middot; 2026</p>
+          </div>
+          <span class="more">Detail</span>
+        </summary>
+        <div class="detail">
+          <dl class="facts">
+            <dt>Problem</dt>
+            <dd>Targets were set at the start of the year and checked against actuals only occasionally, so gaps surfaced long after anything could be done about them.</dd>
+            <dt>What I built</dt>
+            <dd>Variance models across 3 divisions, 15+ client accounts and 600+ headcount, tracking gross margin %, net income and operating expense deviation against plan.</dd>
+            <dt>Tools</dt>
+            <dd class="tools"><span>Excel</span><span>Power Query</span><span>DAX</span><span>Financial modeling</span></dd>
+            <dt>Result</dt>
+            <dd class="impact">The templates were adopted company-wide for FY2026 reporting.</dd>
+          </dl>
+          <figure class="frame">
+            <img src="TargetVsActual.png" alt="Target vs actual variance tracking report" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <figcaption class="ph" style="display:none;">[Screenshot of the variance report]</figcaption>
+          </figure>
+        </div>
+      </details>
+
+      <details class="project">
+        <summary>
+          <div>
+            <h3>Operating expense sheets that fill themselves</h3>
+            <p class="sub">Excel and VBA &middot; 19+ monthly sheets &middot; 2026</p>
+          </div>
+          <span class="more">Detail</span>
+        </summary>
+        <div class="detail">
+          <dl class="facts">
+            <dt>Problem</dt>
+            <dd>Monthly operating expense sheets were typed up one at a time from the same source data &mdash; slow, and easy to get wrong.</dd>
+            <dt>What I built</dt>
+            <dd>VBA macros that populate 19+ monthly operational expense tracking sheets from a single source, plus written usage guides and hands-on training for the company accountant.</dd>
+            <dt>Tools</dt>
+            <dd class="tools"><span>Excel</span><span>VBA</span><span>Process documentation</span></dd>
+            <dt>Result</dt>
+            <dd class="impact">Manual re-entry across the monthly expense pack was eliminated, and non-technical staff now run the workflow themselves.</dd>
+          </dl>
+          <figure class="frame">
+            <img src="operating.png" alt="Automated operating expense tracking sheets" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <figcaption class="ph" style="display:none;">[Screenshot or short screen recording]</figcaption>
+          </figure>
+        </div>
+      </details>
+
+      <details class="project">
+        <summary>
+          <div>
+            <h3>Where Filipinos work, 2012&ndash;2025</h3>
+            <p class="sub">Personal project &middot; interactive data visualization</p>
+          </div>
+          <span class="more">Detail</span>
+        </summary>
+        <div class="detail">
+          <dl class="facts">
+            <dt>Problem</dt>
+            <dd>Labour force data is public, but it sits in statistical tables that are hard to read and harder to compare across years.</dd>
+            <dt>What I built</dt>
+            <dd>An interactive view of employed persons by industry from 2012 to 2025: filters for agriculture, industry and services, the largest industries in 2025, and a rank-by-year chart you can follow on hover or pin with a tap on mobile.</dd>
+            <dt>Tools</dt>
+            <dd class="tools"><span>JavaScript</span><span>SVG</span><span>PSA OpenSTAT data</span></dd>
+            <dt>Result</dt>
+            <dd class="impact">Built for my own curiosity, using the Philippine Statistics Authority Labor Force Survey. An independent project, not an official PSA product.</dd>
+          </dl>
+          <div>
+            <figure class="frame">
+              <img src="wheredo.png" alt="Rank-by-year chart of Filipino employment by industry" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+              <figcaption class="ph" style="display:none;">[Screenshot of the rank-by-year chart]</figcaption>
+            </figure>
+            <a class="visit" href="https://keddenise.github.io/Where-Filipinos-Work-/" target="_blank" rel="noopener">Open the visualization</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="project">
+        <summary>
+          <div>
+            <h3>SpikeGuard, a volleyball training app</h3>
+            <p class="sub">Capstone &middot; Batangas State University &middot; 2026</p>
+          </div>
+          <span class="more">Detail</span>
+        </summary>
+        <div class="detail">
+          <dl class="facts">
+            <dt>Problem</dt>
+            <dd>Coaches and student-athletes tracked training, health and skill assessments on paper, with no shared history to look back on.</dd>
+            <dt>What I built</dt>
+            <dd>An Android app with six modules &mdash; progress tracking, training plans, health monitoring, skill assessments, athlete profiles and performance analytics &mdash; on a MySQL backend with encrypted storage and role-based access, taken through the full SDLC including user acceptance testing.</dd>
+            <dt>Tools</dt>
+            <dd class="tools"><span>MySQL</span><span>Encrypted storage</span><span>Role-based access</span><span>UAT</span></dd>
+            <dt>Result</dt>
+            <dd class="impact">Delivered on schedule with zero critical post-deployment defects.</dd>
+          </dl>
+          <div>
+            <figure class="frame">
+              <img src="spike.png" alt="SpikeGuard volleyball training app screens" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+              <figcaption class="ph" style="display:none;">[App screens]</figcaption>
+            </figure>
+            <a class="visit" href="https://spikeguard.chomphq.net/downloads.php" target="_blank" rel="noopener">Download SpikeGuard</a>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- ===================== FREELANCE ===================== -->
+    <section id="freelance" class="reveal">
+      <div class="head">
+        <h2>Freelance</h2>
+        <p><span class="ph">[I'm drawn to teams juggling messy, manual financial reporting — the kind of work I did at NAM Builders — and want a dashboard that finally tells them what's happening in real time.]</span></p>
+      </div>
+
+      <div class="services">
+        <div class="service">
+          <h3>Dashboard design and build</h3>
+          <p>Interactive dashboards in Excel, Power BI or on the web, with the filters and drill-downs your team will actually open.</p>
+        </div>
+        <div class="service">
+          <h3>Excel and VBA automation</h3>
+          <p>Macros and Power Query flows that take the repeat typing and monthly rebuild work off your hands.</p>
+        </div>
+        <div class="service">
+          <h3>Data visualization</h3>
+          <p>Charts and visual stories built with JavaScript and SVG, made to be read at a glance.</p>
+        </div>
+        <div class="service">
+          <h3>Reporting cleanup</h3>
+          <p>Scattered, conflicting sheets consolidated into one set of numbers everyone can trust.</p>
+        </div>
+      </div>
+
+    <!-- ===================== SKILLS ===================== -->
+    <section id="skills" class="reveal">
+      <div class="head"><h2>Skills</h2></div>
+      <div class="skills">
+        <div class="skillset">
+          <h3>Analysis and BI</h3>
+          <ul class="tags">
+            <li>Power BI</li><li>DAX</li><li>KPI reporting</li><li>Variance analysis</li>
+            <li>Income statement analysis</li><li>Financial modeling</li><li>Forecasting</li>
+          </ul>
+        </div>
+        <div class="skillset">
+          <h3>Automation and engineering</h3>
+          <ul class="tags">
+            <li>VBA macros</li><li>Power Query</li><li>ETL</li><li>Google Apps Script</li><li>REST APIs</li><li>Data cleaning</li>
+          </ul>
+        </div>
+        <div class="skillset">
+          <h3>Programming</h3>
+          <ul class="tags">
+            <li>Python</li><li>Pandas</li><li>NumPy</li><li>Matplotlib</li><li>Scikit-Learn</li>
+            <li>R</li><li>tidyverse</li><li>ggplot2</li><li>SQL</li><li>MySQL</li>
+            <li>HTML</li><li>CSS</li><li>JavaScript</li>
+          </ul>
+        </div>
+        <div class="skillset">
+          <h3>Tools</h3>
+          <ul class="tags">
+            <li>Advanced Excel</li><li>XLOOKUP</li><li>Pivot tables</li><li>Google Sheets</li>
+            <li>Chart.js</li><li>GitHub</li><li>VS Code</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EXPERIENCE ===================== -->
+    <section id="experience" class="reveal">
+      <div class="head"><h2>Experience and education</h2></div>
+      <ul class="timeline">
+        <li>
+          <span class="when">Feb &ndash; May 2026</span>
+          <div><h3>Data Analyst Intern, NAM Builders and Supply Corporation</h3>
+          <small>Tanauan City, Batangas. Executive dashboards, variance reporting, Excel and VBA automation.</small></div>
+        </li>
+        <li>
+          <span class="when">2022 &ndash; 2026</span>
+          <div><h3>BS Information Technology, Business Analytics</h3>
+          <small>Batangas State University TNEU &mdash; JPLPC Malvar</small></div>
+        </li>
+        <li><span class="when">Nov 2025</span><div><h3>Big Data 101</h3><small>IBM SkillsBuild</small></div></li>
+        <li><span class="when">Aug 2025</span><div><h3>Microsoft Azure AI Fundamentals (AZ-900)</h3><small>TESDA</small></div></li>
+        <li><span class="when">May 2025</span><div><h3>Data Analytics Essentials</h3><small>Cisco Networking Academy</small></div></li>
+        <li><span class="when">Feb 2024</span><div><h3>Introduction to Data Science</h3><small>Cisco Networking Academy</small></div></li>
+      </ul>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section id="contact" class="reveal">
+      <div class="head">
+        <h2>Contact</h2>
+        <p>Open to BI, dashboard and data analyst roles, and to freelance projects. Send me a few lines about the data you're working with.</p>
+      </div>
+      <a class="mail" href="mailto:gkhatedenise@gmail.com">gkhatedenise@gmail.com</a>
+      <div class="links">
+        <!-- Replace each span with a real link:-->
+             <a href="https://www.linkedin.com/in/khate-denise-gonzales-397163311" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/keddenise" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://drive.google.com/file/d/1cb27ngli0SyqrZU44IMZWBIDixR7lcz1/view?usp=drive_link" target="_blank" rel="noopener">Resume</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Khate Denise A. Gonzales &mdash; Batangas, Philippines. Built by hand with plain HTML, CSS and JavaScript.</p>
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   SCROLL REVEAL — one small fade per section, then unobserve
+   ============================================================ */
+(function () {
+  var items = document.querySelectorAll(".reveal");
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+    items.forEach(function (el) { el.classList.add("in"); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+    });
+  }, { rootMargin: "0px 0px -6% 0px" });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
